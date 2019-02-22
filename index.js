@@ -15,7 +15,7 @@ readlineSync.promptCLLoop({
      	console.log(target + ' already exists.');
  	} else {
  		try{
-		    mkdirp.sync('./'+target, function (err) {
+		    mkdirp.sync('./directories/'+target, function (err) {
 			    if (err) console.error(err)
 			});
 		    console.log('CREATE ' + target);
@@ -30,7 +30,7 @@ readlineSync.promptCLLoop({
 	try{
 		var endTarget = target.split(/[\s/]+/);
 
-	    fsExtra.moveSync('./'+target, './'+into+'/'+endTarget[endTarget.length-1], err => {
+	    fsExtra.moveSync('./directories/'+target, './directories/'+into+'/'+endTarget[endTarget.length-1], err => {
 		  if(err) return console.error(err);
 		  console.log('success!');
 		});
@@ -43,13 +43,13 @@ readlineSync.promptCLLoop({
 
   },
   LIST: function(target, into) {
-	const tree = dirTree('./', {exclude:/node_modules/}, null, (item, PATH, stats) => {
+	const tree = dirTree('./directories/', {exclude:/node_modules/}, null, (item, PATH, stats) => {
 	    var tab = "  ";
 		var count = (item.path.match(/\\/g) || []).length;
 		function repeatStringNumTimes(string, times) {
 		  return times > 0 ? string.repeat(times) : "";
 		}
-		if (item.path !== './') {
+		if (item.path !== './directories/') {
 			console.log(repeatStringNumTimes(tab, count) + item.name);
 		}
 	});
@@ -57,9 +57,9 @@ readlineSync.promptCLLoop({
   DELETE: function(target) {
   	//refactor
   	try {
-	    fs.statSync(target);
+	    fs.statSync('./directories/'+target);
 		try{
-		    rimraf.sync('./'+target)
+		    rimraf.sync('./directories/'+target);
 		    console.log('DELETE ' + target);
 		}
 		catch(err){
