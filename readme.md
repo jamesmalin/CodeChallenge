@@ -4,6 +4,6 @@
 
 3. Install dependencies using ```cd CodeChallenge && npm install``` from the root directory.
 
-4. Start with ```node .``
+4. Start with ```node .```
 
 5. Available commands: "CREATE", "LIST", "MOVE", "DELETE". Type "exit" to quit.
